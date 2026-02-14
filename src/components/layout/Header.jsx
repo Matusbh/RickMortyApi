@@ -34,7 +34,7 @@ export default function Header() {
                 isActive ? "text-primary" : "text-white"
               }
             >
-              Ubicaciones
+              Favoritos
             </NavLink>
           }
         </nav>

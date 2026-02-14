@@ -48,4 +48,14 @@ const fetchEpisodios = async (page = 1) => {
   return data;
 };
 
+//Personajes por ids
+const fetchPersonajesId = async (page = 1, id = 0) => {
+  const response = await fetch(`${BASE_URL}character/?page=${page}&id=${id}`);
+  if (!response.ok) {
+    throw new Error("Error en la peticion");
+  }
+  const data = await response.json();
+  return data;
+};
+
 export { fetchPersonajes, fetchEpisodios };

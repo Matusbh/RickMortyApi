@@ -55,7 +55,6 @@ export default function CharactersPage() {
     } else if (species === "alien") {
       setSpecies("alien");
     } else if (species === "unknow") {
-      º;
       setSpecies("unknow");
     }
     setOpen2(false);
@@ -138,26 +137,6 @@ export default function CharactersPage() {
           </div>
         </section>
 
-        <nav>
-          <ul className="flex gap-3">
-            <li>
-              <a
-                className="text-2xl text-center mt-5 mb-5 link-underline "
-                href="#"
-              >
-                Todos los personajes
-              </a>
-            </li>
-            <li>
-              <a
-                className="text-2xl text-center mt-5 mb-5 link-underline "
-                href="RickMorty\src\pages\FavoritePages.jsx"
-              >
-                Favoritos
-              </a>
-            </li>
-          </ul>
-        </nav>
         <h2 className="text-4xl text-center mt-5 mb-5"></h2>
         {loading && <p>Cargando...</p>}
         {errorMsg && <p>{errorMsg}</p>}

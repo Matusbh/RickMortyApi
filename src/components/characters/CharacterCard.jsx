@@ -1,9 +1,12 @@
 import Button from "../ui/Button";
+import { useFavorites } from "../../context/favouritesContext";
 
 export default function CharacterCard({ character, onSelect }) {
+  const { favoritesId, toggleFavorite } = useFavorites();
+  const esFav = favoritesId.includes(character.id);
+
   return (
     <article
-      onClick={() => onSelect(character)}
       className="
         group
         flex flex-col
@@ -41,6 +44,7 @@ export default function CharacterCard({ character, onSelect }) {
         </div>
 
         <Button
+          onClick={() => onSelect(character)}
           className="
             mt-2
             w-full
@@ -55,6 +59,10 @@ export default function CharacterCard({ character, onSelect }) {
           "
         >
           View Details →
+        </Button>
+
+        <Button onClick={() => toggleFavorite(character.id)}>
+          {esFav ? "★" : "☆"}
         </Button>
       </div>
     </article>

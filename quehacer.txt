@@ -15,7 +15,7 @@ especie, etc.). CXXXXXXXXXXXXXX
 
 2 Detalle de Personaje
 ● Permitir que al hacer clic en un personaje, se muestre la información completa.XXXXXXXXX
-● Mostrar datos extra como localización, origen y lista de episodios en los que aparece. Faltan Episodios
+● Mostrar datos extra como localización, origen y lista de episodios en los que aparece. XXXXXXX
 
 
 3 Visualización de Episodios (Opcional)
@@ -26,7 +26,7 @@ de emisión, personajes que participan, etc.).
 
 4 Paginación o Carga Dinámica
 ● La API de Rick and Morty ofrece datos paginados. Implementar la paginación o un botón “Cargar
-más” para obtener más resultados.
+más” para obtener más resultados. XXXXXXX
 
 
 5 Favoritos (Opcional con LocalStorage)
@@ -35,11 +35,11 @@ más” para obtener más resultados.
 ● Mostrar una sección o página independiente con la lista de favoritos.
 
 
-6 Manejo de Errores y Estados
+6 Manejo de Errores y Estados XXXXXXX
 ● Mostrar feedback al usuario mientras se cargan los datos (spinner o mensaje de “Cargando…”).
 ● Informar si ocurre algún error al consumir la API (problema de red, endpoint incorrecto, etc.).
 
 
-7 Diseño y Responsividad
+7 Diseño y Responsividad 
 ● Procurar un diseño agradable y adaptado a distintos tamaños de pantalla (móvil, tableta,
 desktop).
