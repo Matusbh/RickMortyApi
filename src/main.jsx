@@ -9,6 +9,7 @@ import { FavoritesProvider } from "../src/context/favouritesContext.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
+      {/*  Se envuleve el componentea App para que todos los componentes hijos tengan acceso al contexto de favoritos*/}
       <FavoritesProvider>
         <App />
       </FavoritesProvider>

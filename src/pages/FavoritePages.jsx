@@ -4,7 +4,7 @@ export default function FavoritePages() {
   return (
     //, Hay que devolver los personajes
     <>
-      <article></article>
+      <article>Hola que hace</article>
     </>
   );
 }
