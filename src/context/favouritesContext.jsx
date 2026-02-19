@@ -7,7 +7,6 @@ export function FavoritesProvider({ children }) {
   const [favoritesId, setFavoritesId] = useState([]);
 
   function toggleFavorite(id) {
-    console.log("ANTES", favoritesId);
     // Si existe ese id se quita
     if (favoritesId.includes(id)) {
       setFavoritesId(favoritesId.filter((item) => item !== id));
@@ -15,7 +14,6 @@ export function FavoritesProvider({ children }) {
       // Si no existe se añade
       setFavoritesId([...favoritesId, id]);
     }
-    console.log("ID", id);
   }
 
   // El valor que se va a compartir a traves del contexto en este caso el estado de favoritos y la funcion para modificarlo

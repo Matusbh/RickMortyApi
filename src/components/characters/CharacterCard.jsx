@@ -5,6 +5,11 @@ export default function CharacterCard({ character, onSelect }) {
   const { favoritesId, toggleFavorite } = useFavorites();
   const esFav = favoritesId.includes(character.id);
 
+  function handleToggleFavorite(e, id) {
+    e.stopPropagation();
+    toggleFavorite(id);
+  }
+
   return (
     <article
       className="
@@ -61,7 +66,7 @@ export default function CharacterCard({ character, onSelect }) {
           View Details →
         </Button>
 
-        <Button onClick={() => toggleFavorite(character.id)}>
+        <Button onClick={(e) => handleToggleFavorite(e, character.id)}>
           {esFav ? "★" : "☆"}
         </Button>
       </div>

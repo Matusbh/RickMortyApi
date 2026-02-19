@@ -10,6 +10,7 @@ export default function App() {
 
       <main>
         <Routes>
+          <Route path="/" element={<Navigate to="/characters" />} />
           <Route path="/characters" element={<CharactersPage />} />
           <Route path="/favorites" element={<FavoritePages />} />
           <Route path="*" element={<h2>No encontrado</h2>} />

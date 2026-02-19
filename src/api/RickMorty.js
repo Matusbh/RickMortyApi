@@ -49,8 +49,8 @@ const fetchEpisodios = async (page = 1) => {
 };
 
 //Personajes por ids
-const fetchPersonajesId = async (page = 1, id = 0) => {
-  const response = await fetch(`${BASE_URL}character/?page=${page}&id=${id}`);
+const fetchPersonajesId = async (id = 0) => {
+  const response = await fetch(`${BASE_URL}character/${id}`);
   if (!response.ok) {
     throw new Error("Error en la peticion");
   }
@@ -58,4 +58,4 @@ const fetchPersonajesId = async (page = 1, id = 0) => {
   return data;
 };
 
-export { fetchPersonajes, fetchEpisodios };
+export { fetchPersonajes, fetchEpisodios, fetchPersonajesId };
