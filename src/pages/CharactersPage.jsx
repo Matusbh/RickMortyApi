@@ -82,9 +82,6 @@ export default function CharactersPage() {
       }
     }
     loadCharacters();
-    {
-      /*Cada vez que cambia la pagina se actualiza ose actualiza el valor del impuit de busqueda */
-    }
   }, [page, search, status, species]);
 
   return (

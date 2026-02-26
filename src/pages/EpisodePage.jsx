@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { fetchEpisodios } from "../api/RickMorty.js";
+import Pagination from "../components/ui/Pagination.jsx";
+import EpisodeGrid from "../components/episodes/EpisodeGrid.jsx";
+import { useFavorites } from "../context/favouritesContext.jsx";
 
 export default function EpisodePage() {
-  // Estados necesarios
-
   const [listaEp, setListaEpisodios] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  const [episodioSeleccionado, setEpisodioleccionado] = useState(null);
+  const [episodioSeleccionado, setEpisodioSeleccionado] = useState(null);
 
   // para la paginacion
   const [page, setPage] = useState(1);
@@ -23,29 +24,62 @@ export default function EpisodePage() {
         setErrorMsg("");
 
         const data = await fetchEpisodios(page);
-        //Actualizamos estados de los episodios
-        setListaEpisodios(data.results);
-        setTotalPages(data.info.pages);
-      } catch {
+        console.log(data.results);
+        setListaEpisodios(data.results ?? []);
+        setTotalPages(data.info.pages ?? 1);
+        console.log(listaEp);
+      } catch (error) {
         setErrorMsg("Ha fallado la carga de los episodios");
+        setListaEpisodios([]);
+        setTotalPages(1);
       } finally {
         setLoading(false);
       }
     }
     loadEpisodes();
-    {
-      /*Cada vez que cambia la pagina se actualiza */
-    }
   }, [page]);
 
   //* Renderizados
 
   return (
     <>
-      <section>
-        <h2>Todos los episodios</h2>
-        <p></p>
-      </section>
+      <article>
+        <h1>Todos los episodios</h1>
+      </article>
+
+      {loading && <p>Cargando...</p>}
+
+      <div>
+        {!loading && errorMsg && <p>{errorMsg}</p>}
+
+        {!loading && !errorMsg && listaEp.length === 0 && (
+          <h2>No hay episodios disponibles</h2>
+        )}
+      </div>
+
+      <div>
+        {!loading && !errorMsg && (
+          <EpisodeGrid episodios={listaEp} onSelect={setEpisodioSeleccionado} />
+        )}
+      </div>
+
+      <div>
+        <Pagination
+          page={page}
+          totalPages={totalPage}
+          onChangePage={setPage}
+        ></Pagination>
+      </div>
+
+      {
+        //Si existe episodioSeleccionado renderiza el modal para mostrar el detalle
+      }
+      {/* {episodioSeleccionado && (
+        <CharacterDetailModal
+          character={episodioSeleccionado}
+          onClose={() => setEpisodioSeleccionado(null)}
+        />
+      )} */}
     </>
   );
 }

@@ -1,12 +1,24 @@
 import { useEffect, useState, useContext } from "react";
 import { fetchPersonajesId } from "../api/RickMorty.js";
 import { useFavorites } from "../context/favouritesContext.jsx";
-import Pagination from "../components/ui/Pagination.jsx";
 import CharacterGrid from "../components/characters/CharacterGrid.jsx";
 import CharacterDetailModal from "../components/characters/CharacterDetailModal.jsx";
 
 export default function FavoritePages() {
-  const [personajes, setPersonajes] = useState([]);
+  const [personajes, setPersonajes] = useState(() => {
+    const storedPersonajes = localStorage.getItem("personajes");
+    if (!storedPersonajes) return [];
+
+    try {
+      const parsed = JSON.parse(storedPersonajes);
+      // Si lo que tengo no es un array no se usa
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      // Si el json esta vacio arrancamos con una lista de personajes vacios
+      return [];
+    }
+  });
+
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState(null);
@@ -27,10 +39,7 @@ export default function FavoritePages() {
       try {
         setLoading(true);
         setErrorMsg("");
-
         const data = await fetchPersonajesId(sortedFiltrado);
-        setPersonajes(data);
-
         // Si solo pedimos un objeto:
         // Si lo que llega de data es array devolvemos lo que tenemos si no lo convertimos en array
         const normalize = Array.isArray(data) ? data : [data];

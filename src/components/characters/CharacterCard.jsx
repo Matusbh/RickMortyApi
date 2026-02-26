@@ -67,7 +67,7 @@ export default function CharacterCard({ character, onSelect }) {
         </Button>
 
         <Button onClick={(e) => handleToggleFavorite(e, character.id)}>
-          {esFav ? "★" : "☆"}
+          {esFav ? "❤️" : "🤍"}
         </Button>
       </div>
     </article>

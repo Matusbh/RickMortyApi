@@ -1,10 +1,26 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 //Creamos un contexto global para compartir el estado de favoritos entre los componentes sin necesidad de pasar props manualmente a cada nivel del árbol de componentes. Este contexto se encargará de almacenar los IDs de los personajes favoritos y proporcionar una función para agregar o eliminar personajes de la lista de favoritos.
 const FavoriteContext = createContext(null);
 
 export function FavoritesProvider({ children }) {
-  const [favoritesId, setFavoritesId] = useState([]);
+  const [favoritesId, setFavoritesId] = useState(() => {
+    const storedPersonajes = localStorage.getItem("favoritesId");
+    if (!storedPersonajes) return [];
+
+    try {
+      const parsed = JSON.parse(storedPersonajes);
+      // Si lo que tengo no es un array no se usa
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      // Si el json esta vacio arrancamos con una lista de personajes vacios
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem("favoritesId", JSON.stringify(favoritesId));
+  }, [favoritesId]);
 
   function toggleFavorite(id) {
     // Si existe ese id se quita
