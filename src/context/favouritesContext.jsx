@@ -18,9 +18,30 @@ export function FavoritesProvider({ children }) {
     }
   });
 
+  //Estado para gestionar los episodios facvoritos
+  const [favoritesEpisodesId, setFavoritesEpisodesId] = useState(() => {
+    const storedPersonajes = localStorage.getItem("favoritesEpisodesId");
+    if (!storedPersonajes) return [];
+
+    try {
+      const parsed = JSON.parse(storedPersonajes);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      // Si el json esta vacio arrancamos con una lista de episodios vacios
+      return [];
+    }
+  });
+
   useEffect(() => {
     localStorage.setItem("favoritesId", JSON.stringify(favoritesId));
   }, [favoritesId]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "favoritesEpisodesId",
+      JSON.stringify(favoritesEpisodesId),
+    );
+  }, [favoritesEpisodesId]);
 
   function toggleFavorite(id) {
     // Si existe ese id se quita
@@ -31,19 +52,32 @@ export function FavoritesProvider({ children }) {
       setFavoritesId([...favoritesId, id]);
     }
   }
-
-  // El valor que se va a compartir a traves del contexto en este caso el estado de favoritos y la funcion para modificarlo
-  const value = { favoritesId, toggleFavorite };
+  function toggleFavoriteEpisode(id) {
+    // Si existe ese id se quita de la lista
+    if (favoritesEpisodesId.includes(id)) {
+      setFavoritesEpisodesId(favoritesEpisodesId.filter((item) => item !== id));
+    } else {
+      // Si no existe se añade a la lista que ya tenemos
+      setFavoritesEpisodesId([...favoritesEpisodesId, id]);
+    }
+  }
 
   return (
     // se llama a este apartado con .provider porque es el proveedor del contexto, y se le pasa el valor que queremos compartir a los componentes hijos, en este caso el estado de favoritos y la funcion para modificarlo
-    <FavoriteContext.Provider value={value}>
+
+    // un objeto plano que contenga directamente los estados y funciones que quieres usar
+    <FavoriteContext.Provider
+      value={{
+        favoritesId,
+        toggleFavorite,
+        favoritesEpisodesId,
+        toggleFavoriteEpisode,
+      }}
+    >
       {children}
     </FavoriteContext.Provider>
   );
 }
-
-// Necesito entender bien esta parte, es para usar el contexto en cualquier componente sin tener que importar el contexto y usar useContext cada vez, con esto solo importo esta funcion y ya tengo acceso a todo lo del contexto
 
 export function useFavorites() {
   const contexto = useContext(FavoriteContext);

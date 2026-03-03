@@ -31,7 +31,7 @@ const fetchPersonajes = async (
   const response = await fetch(url);
 
   if (!response.ok) {
-    throw new Error("Error en la peticion");
+    throw new Error("Error en la peticion de personajes");
   }
   const data = await response.json();
   return data;
@@ -42,20 +42,31 @@ const fetchEpisodios = async (page = 1) => {
   const response = await fetch(`${BASE_URL}episode/?page=${page}`);
 
   if (!response.ok) {
-    throw new Error("Error en la peticion");
+    throw new Error("Error en la peticion de episodios");
+  }
+  const data = await response.json();
+  return data;
+};
+
+// Episodios por id
+const fetchEpisodiosID = async (id = 1) => {
+  const response = await fetch(`${BASE_URL}episode/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Error en la peticion de episodio por id");
   }
   const data = await response.json();
   return data;
 };
 
 //Personajes por ids
-const fetchPersonajesId = async (id = 0) => {
+const fetchPersonajesId = async (id = 1) => {
   const response = await fetch(`${BASE_URL}character/${id}`);
   if (!response.ok) {
-    throw new Error("Error en la peticion");
+    throw new Error("Error en la peticion depersonajes por id");
   }
   const data = await response.json();
   return data;
 };
 
-export { fetchPersonajes, fetchEpisodios, fetchPersonajesId };
+export { fetchPersonajes, fetchEpisodios, fetchPersonajesId, fetchEpisodiosID };

@@ -2,12 +2,12 @@ import Button from "../ui/Button";
 import { useFavorites } from "../../context/favouritesContext";
 
 export default function EpisodeCard({ episode, onSelect }) {
-  const { favoritesId, toggleFavorite } = useFavorites();
-  const esFav = favoritesId.includes(episode.id);
+  const { favoritesEpisodesId, toggleFavoriteEpisode } = useFavorites();
+  const esFav = favoritesEpisodesId.includes(episode.id);
 
   function handleToggleFavorite(e, id) {
     e.stopPropagation();
-    toggleFavorite(id);
+    toggleFavoriteEpisode(id);
   }
 
   return (
@@ -16,8 +16,8 @@ export default function EpisodeCard({ episode, onSelect }) {
         group bg-card-dark rounded-xl p-4 border border-white/5 hover:border-primary/50 transition-all duration-300 flex flex-col justify-between h-64"
     >
       <div className="flex flex-col gap-2">
-        <h3 className="text-white text-lg font-bold truncate">
-          {episode?.name || episode?.id || "Unknown"}
+        <h3 className="text-white  text-xl font-bold truncate">
+          {episode.name}
         </h3>
 
         <div className="w-full flex flex-wrap gap-2">

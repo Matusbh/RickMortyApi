@@ -1,8 +1,10 @@
 import { useEffect, useState, useContext } from "react";
 import { fetchPersonajesId } from "../api/RickMorty.js";
+import { fetchEpisodiosID } from "../api/RickMorty.js";
 import { useFavorites } from "../context/favouritesContext.jsx";
 import CharacterGrid from "../components/characters/CharacterGrid.jsx";
 import CharacterDetailModal from "../components/characters/CharacterDetailModal.jsx";
+import EpisodeGrid from "../components/episodes/EpisodeGrid.jsx";
 
 export default function FavoritePages() {
   const [personajes, setPersonajes] = useState(() => {
@@ -21,10 +23,25 @@ export default function FavoritePages() {
 
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [loading2, setLoading2] = useState(false);
+  const [errorMsg2, setErrorMsg2] = useState("");
+
+  const [listaEp, setListaEpisodios] = useState(() => {
+    const storedEpisodios = localStorage.getItem("episodios");
+    if (!storedEpisodios) return [];
+  });
+  const [episodioSeleccionado, setEpisodioSeleccionado] = useState(null);
+
+  const [page2, setPage2] = useState(1);
+  const [totalPage2, setTotalPages2] = useState(1);
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState(null);
 
   const { favoritesId } = useFavorites();
   const sortedFiltrado = [...favoritesId].sort((a, b) => a - b).join(",");
+  const { favoritesEpisodesId } = useFavorites();
+  const sortedFiltradoEpisodes = [...favoritesEpisodesId]
+    .sort((a, b) => a - b)
+    .join(",");
 
   useEffect(() => {
     async function loadCharactersID() {
@@ -55,9 +72,38 @@ export default function FavoritePages() {
     loadCharactersID();
   }, [favoritesId, sortedFiltrado]);
 
+  // Episodios por ides para los favoritos
+  useEffect(() => {
+    // Si no hay favoritos no llamamos a la api
+    if (favoritesEpisodesId.length === 0) {
+      setLoading2(false);
+      setErrorMsg2("");
+      setListaEpisodios([]);
+      return;
+    }
+    async function loadEpisodes() {
+      try {
+        setLoading2(true);
+        setErrorMsg2("");
+
+        const dataEpisode = await fetchEpisodiosID(sortedFiltradoEpisodes);
+        setListaEpisodios(dataEpisode ?? []);
+        console.log(dataEpisode);
+      } catch (error) {
+        setErrorMsg2("Ha fallado la carga de los episodios desde el favoritos");
+        setListaEpisodios([]);
+        setTotalPages2(1);
+      } finally {
+        setLoading2(false);
+        console.log(listaEp);
+      }
+    }
+    loadEpisodes();
+  }, [favoritesEpisodesId, sortedFiltradoEpisodes]);
+
   return (
     <>
-      <article>
+      <article id="personajes">
         <h1>Personajes favoritos</h1>
       </article>
 
@@ -89,6 +135,31 @@ export default function FavoritePages() {
           onClose={() => setPersonajeSeleccionado(null)}
         />
       )}
+
+      <article id="episodios">
+        <article>
+          <h1>Todos los episodios</h1>
+        </article>
+
+        {loading2 && <p>Cargando...</p>}
+
+        <div>
+          {!loading2 && errorMsg2 && <p>{errorMsg2}</p>}
+
+          {!loading2 && !errorMsg2 && favoritesEpisodesId.length === 0 && (
+            <h2>No hay episodios disponibles</h2>
+          )}
+        </div>
+
+        <div>
+          {!loading2 && !errorMsg2 && (
+            <EpisodeGrid
+              episodios={listaEp}
+              onSelect={setEpisodioSeleccionado}
+            />
+          )}
+        </div>
+      </article>
     </>
   );
 }
