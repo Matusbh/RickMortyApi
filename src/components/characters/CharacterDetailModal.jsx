@@ -39,16 +39,22 @@ export default function CharacterDetailModal({ character, onClose }) {
       className="fixed inset-0 bg-background-dark/90 z-50 flex justify-center items-center backdrop-blur-sm p-4"
       onClick={onClose}
     >
-      {/* Renderizamos el fondo backdrop*/}
-
       {/* La caja del detalle */}
       <div
         className="relative w-full max-w-[800px] max-h-[90vh] overflow-y-auto bg-[#222222] rounded-xl border border-white/10 shadow-2xl p-5"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex gap-7 justify-normal">
+        {/* Botón X solo en móvil/tablet */}
+        <button
+          className="absolute top-4 right-4 text-white text-3xl font-bold bg-black/30 rounded-full w-10 h-10 flex items-center justify-center  md:hidden"
+          aria-label="Cerrar detalle"
+          onClick={onClose}
+        >
+          X
+        </button>
+        <div className="flex flex-col justify-center items-center sm:flex sm:flex-row sm:gap-7 sm:justify-normal ">
           <img
-            className="max-w-48 rounded-lg"
+            className="max-w-48 rounded-lg "
             src={character.image}
             alt={character.name}
           />

@@ -13,7 +13,7 @@ export default function EpisodeCard({ episode, onSelect }) {
   return (
     <article
       className="
-        group bg-dark-accent rounded-xl p-4 border border-white/5 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-64 "
+        group bg-dark-accent/40 rounded-xl p-4 border border-white/5 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-64 "
     >
       <div className="flex flex-col gap-2">
         <h3 className="text-white font-metal text-3xl font-bold truncate text-center">

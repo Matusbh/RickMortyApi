@@ -45,6 +45,15 @@ export default function EpisodeDetail({ episode, onClose }) {
         className="relative w-full max-w-[800px] max-h-[90vh] overflow-y-auto bg-[#222222] rounded-xl border border-white/10 shadow-2xl p-5"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Botón X solo en móvil/tablet */}
+        <button
+          className="absolute top-4 right-4 text-white text-3xl font-bold bg-black/30 rounded-full w-10 h-10 flex items-center justify-center md:hidden"
+          aria-label="Cerrar detalle"
+          onClick={onClose}
+        >
+          X
+        </button>
+
         <div id="caja-episodio" className="w-full">
           {EpisodeCard({ episode, onSelect: () => {} })}
         </div>
@@ -69,13 +78,18 @@ export default function EpisodeDetail({ episode, onClose }) {
           {!load &&
             !mensajeError &&
             (personajes.length > 0 ? (
-              <div className="p-4 grid grid-cols-1 sm:grid-cols-2  gap-4">
+              <div className="p-4 grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4 gap-4">
                 {personajes.map((personaje) => (
                   <div
                     key={personaje.id}
-                    className="bg-dark-accent p-4 rounded-lg"
+                    className="bg-dark-accent p-4 rounded-lg flex flex-col items-center gap-3 border border-white/10"
                   >
-                    <p className="text-white/90 font-medium truncate">
+                    <img
+                      src={personaje.image}
+                      alt={personaje.name}
+                      className="w-32 h-32 object-cover rounded-full border border-white/20"
+                    />
+                    <p className="text-white/90 font-medium font-metal text-2xl truncate">
                       {personaje.name}
                     </p>
                   </div>

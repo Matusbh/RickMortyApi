@@ -16,7 +16,7 @@ export default function CharacterCard({ character, onSelect }) {
         group
         flex flex-col
         w-full
-        bg-dark-accent/20
+        bg-dark-accent/40
         border border-dark-accent/30
         hover:border-primary/40
         hover:shadow-lg

@@ -23,6 +23,11 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
-  background: #142111;
+  background-image: url("../../public/fondo-rm.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
   color: white;
 }
