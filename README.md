@@ -1,11 +1,15 @@
 # React Rick and Morty API
 
-## Vista Previa
+## Miniatura
 
 ![Vista previa de la aplicación](public/VistaPrevia.png)
 
+## Vista Previa
+
+[Ver aplicación en vivo](https://matusbh.github.io/RickMortyApi/#/characters)
 
 ## Descripción
+
 Este repositorio contiene un proyecto realizado con React, enfocado en el consumo de APIs y la mejora de habilidades en el desarrollo frontend.
 
 ## Descripción del Proyecto
