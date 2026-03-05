@@ -3,6 +3,7 @@ import { fetchEpisodios } from "../api/RickMorty.js";
 import Pagination from "../components/ui/Pagination.jsx";
 import EpisodeGrid from "../components/episodes/EpisodeGrid.jsx";
 import { useFavorites } from "../context/favouritesContext.jsx";
+import EpisodeDetail from "../components/episodes/EpisodeDetail.jsx";
 
 export default function EpisodePage() {
   const [listaEp, setListaEpisodios] = useState([]);
@@ -24,10 +25,9 @@ export default function EpisodePage() {
         setErrorMsg("");
 
         const data = await fetchEpisodios(page);
-        console.log(data.results);
+
         setListaEpisodios(data.results ?? []);
         setTotalPages(data.info.pages ?? 1);
-        console.log(listaEp);
       } catch (error) {
         setErrorMsg("Ha fallado la carga de los episodios");
         setListaEpisodios([]);
@@ -43,13 +43,9 @@ export default function EpisodePage() {
 
   return (
     <>
-      <article>
-        <h1>Todos los episodios</h1>
-      </article>
-
       {loading && <p>Cargando...</p>}
 
-      <div>
+      <div className="mt-8">
         {!loading && errorMsg && <p>{errorMsg}</p>}
 
         {!loading && !errorMsg && listaEp.length === 0 && (
@@ -63,7 +59,7 @@ export default function EpisodePage() {
         )}
       </div>
 
-      <div>
+      <div className="text-center align-center">
         <Pagination
           page={page}
           totalPages={totalPage}
@@ -74,12 +70,12 @@ export default function EpisodePage() {
       {
         //Si existe episodioSeleccionado renderiza el modal para mostrar el detalle
       }
-      {/* {episodioSeleccionado && (
-        <CharacterDetailModal
-          character={episodioSeleccionado}
+      {episodioSeleccionado && (
+        <EpisodeDetail
+          episode={episodioSeleccionado}
           onClose={() => setEpisodioSeleccionado(null)}
         />
-      )} */}
+      )}
     </>
   );
 }

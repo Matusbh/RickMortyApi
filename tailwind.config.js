@@ -13,6 +13,8 @@ export default {
       },
       fontFamily: {
         display: ["Inter", "sans-serif"],
+        metal: ["Metal Mania", "cursive"],
+        sans: ["IBM Plex Sans", "cursive"],
       },
       borderRadius: {
         DEFAULT: "0.25rem",

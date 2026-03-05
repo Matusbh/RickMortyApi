@@ -19,9 +19,11 @@ export default function CharacterCard({ character, onSelect }) {
         bg-dark-accent/20
         border border-dark-accent/30
         hover:border-primary/40
+        hover:shadow-lg
+        hover:-translate-y-1
+        transition-all
         rounded-xl
         p-3
-        transition-all
         cursor-pointer
       "
     >
@@ -34,7 +36,7 @@ export default function CharacterCard({ character, onSelect }) {
       </div>
 
       <div className="flex flex-col gap-2">
-        <h3 className="text-white text-lg font-bold truncate">
+        <h3 className="text-white text-2xl font-metal font-bold truncate">
           {character.name}
         </h3>
 
@@ -63,7 +65,7 @@ export default function CharacterCard({ character, onSelect }) {
             transition-all
           "
         >
-          View Details →
+          Ver detalles →
         </Button>
 
         <Button onClick={(e) => handleToggleFavorite(e, character.id)}>

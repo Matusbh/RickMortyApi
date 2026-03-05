@@ -88,14 +88,12 @@ export default function FavoritePages() {
 
         const dataEpisode = await fetchEpisodiosID(sortedFiltradoEpisodes);
         setListaEpisodios(dataEpisode ?? []);
-        console.log(dataEpisode);
       } catch (error) {
         setErrorMsg2("Ha fallado la carga de los episodios desde el favoritos");
         setListaEpisodios([]);
         setTotalPages2(1);
       } finally {
         setLoading2(false);
-        console.log(listaEp);
       }
     }
     loadEpisodes();
@@ -103,8 +101,96 @@ export default function FavoritePages() {
 
   return (
     <>
+      <article
+        id="totales"
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 mt-10 border-b pb-10 border-green-500"
+      >
+        <div
+          className="
+      group flex items-center gap-4
+      bg-dark-accent/80 backdrop-blur-md
+      border border-white/5 hover:border-primary/40
+      rounded-2xl p-6
+      transition-all duration-300
+      shadow-lg hover:shadow-primary/10
+       hover:shadow-lg
+        hover:-translate-y-1
+        
+      
+    "
+        >
+          <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5">
+            <img src="/RickMortyApi/svg/user-svg.svg" className="w-6 h-6" />
+          </div>
+
+          <div className="flex flex-col ">
+            <span className="text-3xl font-bold text-white">
+              {favoritesId.length}
+            </span>
+            <span className="text-sm uppercase tracking-wide text-gray-400">
+              Personajes
+            </span>
+          </div>
+        </div>
+
+        <div
+          className="
+      group flex items-center gap-4
+      bg-dark-accent/80 backdrop-blur-md
+      border border-white/5 hover:border-primary/40
+      rounded-2xl p-6
+      transition-all duration-300
+      shadow-lg hover:shadow-primary/10
+       hover:shadow-lg
+        hover:-translate-y-1
+        
+    "
+        >
+          <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5">
+            <img src="/RickMortyApi/svg/tv-svg.svg" className="w-6 h-6" />
+          </div>
+
+          <div className="flex flex-col">
+            <span className="text-3xl font-bold text-white">
+              {favoritesEpisodesId.length}
+            </span>
+            <span className="text-sm uppercase tracking-wide text-gray-400">
+              Episodios
+            </span>
+          </div>
+        </div>
+
+        <div
+          className="
+      group flex items-center gap-4
+      bg-dark-accent/80 backdrop-blur-md
+      border border-white/5 hover:border-primary/40
+      rounded-2xl p-6
+      transition-all duration-300
+      shadow-lg hover:shadow-yellow-400/10
+       hover:shadow-lg
+        hover:-translate-y-1
+        
+    "
+        >
+          <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5">
+            <img src="/RickMortyApi/svg/star-svg.svg" className="w-6 h-6" />
+          </div>
+
+          <div className="flex flex-col">
+            <span className="text-3xl font-bold text-white">
+              {favoritesEpisodesId.length + favoritesId.length}
+            </span>
+            <span className="text-sm uppercase tracking-wide text-gray-400">
+              Total
+            </span>
+          </div>
+        </div>
+      </article>
       <article id="personajes">
-        <h1>Personajes favoritos</h1>
+        <h2 className="font-metal text-3xl text-center m-7">
+          Personajes favoritos
+        </h2>
       </article>
 
       {loading && <p>Cargando...</p>}
@@ -138,7 +224,9 @@ export default function FavoritePages() {
 
       <article id="episodios">
         <article>
-          <h1>Todos los episodios</h1>
+          <h2 className="font-metal text-3xl text-center m-7">
+            Todos los episodios
+          </h2>
         </article>
 
         {loading2 && <p>Cargando...</p>}
