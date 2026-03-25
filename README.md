@@ -1,34 +1,43 @@
-# React Rick and Morty API
+# Rick & Morty Character Explorer
 
-## Miniatura
+Aplicación web construida con React que consume la API pública de Rick & Morty.
+Permite explorar personajes y episodios con filtrado dinámico en tiempo real.
 
-![Vista previa de la aplicación](public/VistaPrevia.png)
+## Demo
 
-## Vista Previa
+[Demo](https://matusbh.github.io/RickMortyApi/#/characters)
 
-[Ver aplicación en vivo](https://matusbh.github.io/RickMortyApi/#/characters)
+## Qué hace
 
-## Descripción
+- Consume la API pública de Rick & Morty (rickandmortyapi.com)
+- Filtrado dinámico de personajes por nombre, estado y especie
+- Gestión de favoritos con persistencia mediante localStorage
+- Navegación entre personajes y episodios
+- Diseño responsive adaptado a móvil y escritorio
 
-Este repositorio contiene un proyecto realizado con React, enfocado en el consumo de APIs y la mejora de habilidades en el desarrollo frontend.
-
-## Descripción del Proyecto
-
-El objetivo principal de este proyecto es practicar y profundizar en el uso de React, especialmente en el manejo de hooks y el contexto global para la gestión de estados, como la funcionalidad de añadir personajes favoritos.
-
-## Funcionalidades
-
-- Consulta y visualización de personajes y episodios de la API de Rick and Morty.
-- Búsqueda y filtrado de personajes.
-- Sistema de favoritos utilizando el contexto global de React.
-- Interfaz moderna y responsiva.
-
-## Tecnologías Utilizadas
+## Stack
 
 - React
-- Vite
+- JavaScript
 - Tailwind CSS
+- REST API
+- React Router
+- localStorage
 
-## ¿Qué hace la web?
+## Decisiones técnicas
 
-La aplicación permite explorar personajes y episodios de la serie Rick and Morty, buscar por nombre, filtrar resultados y guardar personajes favoritos para un acceso rápido.
+Se usó React Router para la navegación entre vistas sin recarga de página.
+Los favoritos se persisten en localStorage para mantener el estado entre sesiones
+sin necesidad de backend. El filtrado es local sobre los datos ya cargados
+para evitar llamadas innecesarias a la API.
+
+## Instalación
+```bash
+git clone https://github.com/Matusbh/RickMortyApi.git
+cd RickMortyApi
+npm install
+npm run dev
+```
+
+## Captura
+![Vista previa de la aplicación](public/VistaPrevia.png)
